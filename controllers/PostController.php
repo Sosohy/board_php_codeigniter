@@ -1,20 +1,21 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class PostController extends CI_Controller {
+class PostController extends CI_Controller 
+{
+	function __construct(){
+		        parent::__construct();
+		        $this->load->database();
+		        $this->load->model('PostModel');
+		    }
 
-	public function __construct()
-    {
-        parent::__construct();
-        $this->load->database();
-    }
+	public function index()
+	{
+		$this->getPostList();
+	}
 
-    public function index()
-    {
-        $this->load->view('post_detail');
-        $result = $this->db->query('select * from post')->result();
-        foreach ($result as $item) {
-            echo $item->title;
-        }
-    }
+	public function getPostList(){
+		        $data['postList'] = $this->PostModel->getPostList();
+				$this->load->view('post_list', $data);
+		    }
 }
