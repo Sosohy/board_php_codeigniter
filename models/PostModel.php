@@ -14,5 +14,11 @@ class PostModel extends CI_Model{
         return $result;
     }
 
+    function getPost($idx){
+        $sql = "select * from post where id = '".$idx."'";
+        $result = $this->db->get_where('post', array('id'=>$idx))->row();
+         
+        return $result;
+    }
 
 }
