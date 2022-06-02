@@ -7,6 +7,7 @@ class PostController extends CI_Controller
 		        parent::__construct();
 		        $this->load->database();
 		        $this->load->model('PostModel');
+				$this->load->model('UserModel');
 }
 
 	public function index() {
