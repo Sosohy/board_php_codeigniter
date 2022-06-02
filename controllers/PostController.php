@@ -20,8 +20,9 @@ class PostController extends CI_Controller
 	}
 
 	public function viewPost($idx=1) {
-		$data['post'] = $this -> PostModel -> getPost($idx);
-		$this -> load -> view('view_post', $data);
+		// $data['post'] = $this -> PostModel -> getPost($idx);
+		// $this -> load -> view('view_post', $data);
+		$this -> load -> view('write_post');
 	}
 
 	// public function writePost(){
