@@ -17,4 +17,7 @@
             </tr>
         </tbody>
     </table>
+    <hr>
+    <?=$post->content?>
+    <hr>
 </article>

@@ -15,10 +15,12 @@ class PostModel extends CI_Model{
     }
 
     function getPost($idx){
-        $sql = "select * from post where id = '".$idx."'";
+        $sql = "update post SET views = views + 1 WHERE id=".$idx."";
+        $this->db->query($sql);
+
         $result = $this->db->get_where('post', array('id'=>$idx))->row();
-         
         return $result;
     }
 
+    
 }
