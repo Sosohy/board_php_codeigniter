@@ -8,7 +8,7 @@ class PostController extends CI_Controller
 		        $this->load->database();
 		        $this->load->model('PostModel');
 				$this->load->model('UserModel');
-}
+	}
 
 	public function index() {
 		$this -> getPostList();
@@ -26,8 +26,6 @@ class PostController extends CI_Controller
 	}
 
 	public function writePost(){
-		//echo '<meta http-equiv="content-type" content="text/html; charset=utf-8" />';
-
 		if($_POST){
 			$userData = array(
 				'name'=> $this->input->post('name', TRUE),
@@ -70,9 +68,6 @@ class PostController extends CI_Controller
 			$this->getPostList();
 		}else{
 			$this->viewPost($this->uri->segment(3));
-			// $data['post'] = $this -> PostModel -> getPost($this->uri->segment(4));
-			// $data['user'] = $this -> UserModel -> getUser($this->uri->segment(5));
-			// $this -> load -> view('modify_post', $data);
 		}
 	}
 
@@ -92,7 +87,6 @@ class PostController extends CI_Controller
 				}	
 			}else{
 			}
-
 		}else{
 			$data['func'] = $func;
 			$data['post'] = $this -> PostModel -> getPost($this->uri->segment(4));
@@ -100,4 +94,11 @@ class PostController extends CI_Controller
 			$this -> load -> view('confirm_user', $data);
 		}
 	}
+
+	function searchPost($word){
+		$data['post'] = $this -> PostModel -> searchPost($word);
+		$data['word'] = $word;
+		$this -> load -> view('post_search', $data);
+	}
+
 }

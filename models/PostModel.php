@@ -48,4 +48,11 @@ class PostModel extends CI_Model{
         $result = $this->db->where('id', $idx)-> delete('post');
         return $result;
     }
+
+    function searchPost($word){
+        $sql = "Select * FROM post JOIN user on post.writer = user.id WHERE (title LIKE '%".$word."%') OR (content LIKE '%".$word."%') OR (name LIKE '%".$word."%');";
+        $result = $this->db->query($sql)->result();
+
+        return $result;
+    }
 }
