@@ -53,9 +53,9 @@ class PostController extends CI_Controller
 	}
 
 	function deletePost(){
-		$result = $this->UserModel->deleteUser($this->uri->segment(5));
+		$result = $this->PostModel->deletePost($this->uri->segment(4));
 		if($result > 0)
-			$this->PostModel->deletePost($this->uri->segment(4));
+			$this->UserModel->deleteUser($this->uri->segment(5));
 		$this->getPostList();
 	}
 
