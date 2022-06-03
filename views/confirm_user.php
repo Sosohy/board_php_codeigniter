@@ -3,45 +3,39 @@
         <h1> </h1>
     </header>
 
-    <form class="form-horizontal" method="post" action="" id="writeAction">
+    <form class="form-horizontal" method="post" action="" id="confirmAction">
         <fieldset>
-            <?php if($post->func == "delete"){ ?>
+            <?php if($func == "delete"){ ?>
                 <legend>게시글 삭제</legend>
                 <p> 게시글 삭제 시 복구가 불가능합니다. </p>
-                <?php }else{ ?>
-                    <legend>게시글 수정</legend>
-                <p> 게시글 수정 </p>
-                    <?php }?>
+            <?php }else{ ?>
+                <legend>수정하기</legend>
+            <?php }?>
            
-           
-           <legend>글쓰기</legend>
+            <p>글 정보</p>
             <table cellpadding="5" cellspacing="5">
                 <tbody>
                     <tr>
-                        <td>제목</td> <td><input type="text" class="input-xlarge" id="title" name="title">
+                        <td>제목</td> <td><?=$post->title?></td>
                     </tr>
                     <tr>
-                        <td>내용</td> <td><textarea class="input-xlarge" id="content" name="content"></textarea>
+                        <td>작성자</td> <td><?=$user->name?></td>
                     </tr>
+                </tbody>
+            </table>
+
+            <p>글 작성시 설정한 비밀번호를 입력해주세요.</p>
+            <table cellpadding="5" cellspacing="5">
+                <tbody>
                     <tr>
-                        <td>작성자</td> <td><input type="text" class="input-xlarge" id="name" name="name">
-                        <td>이메일(선택)</td> <td><input type="text" class="input-xlarge" id="email" name="email">
-                    </tr>
-                    <tr>
-                        <td>비밀번호</td> <td><input type="password" class="input-xlarge" id="pw" name="pw">
-                    </tr>
-                    <tr>
-                        <td>공개글 설정</td>
-                        <td>
-                        <input type="radio" name="private" value='0' checked="checked">공개글
-                        <input type="radio" name="private" value='1'> 비밀글
-                        </td>
+                        <td>비밀번호</td> <td><input type="password" class="input-xlarge" id="pw" name="pw"></td>
                     </tr>
                 </tbody>
             </table>
             <div class="form-actions">
-                <button type="submit" class="btn btn-primary" id="writeBtn">완료</button>
                 <button class="btn" onClick="document.location.reload()">취소</button>
+                <button type="submit" class="btn btn-primary" id="confirmUserPW">완료</button>  
+            </div>
         </fieldset> 
     </form>
 </article>

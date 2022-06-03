@@ -26,14 +26,24 @@ class PostModel extends CI_Model{
         $insertArray = array(
             'title' => $array['title'],
             'content' => $array['content'],
-            'writer' => $array['writer']
+            'writer' => $array['writer'],
+            'private' => $array['private']
         );
-
         $this->db->insert('post', $insertArray);
+
         $result = $this->db->insert_id();
         return $result;
     }
     
+    function modifyPost($array, $idx){
+        $insertArray = array(
+            'title' => $array['title'],
+            'content' => $array['content'],
+            'private' => $array['private']
+        );
+        $this->db->where('id', $idx)->update('post', $insertArray);
+    }
+
     function deletePost($idx) {
         $result = $this->db->where('id', $idx)-> delete('post');
         return $result;

@@ -7,6 +7,12 @@ class UserModel extends CI_Model{
         $this->load->database();
     }
 
+    function getUsers(){
+        $sql = "Select * FROM user WHERE id IN (SELECT writer FROM post ORDER BY id) GROUP BY id;";
+        $result = $this->db->query($sql)->result();
+        return $result;
+    }
+
     public function getUser($idx){
         $result = $this->db->get_where('user', array('id'=>$idx))->row();
         return $result;
@@ -28,5 +34,11 @@ class UserModel extends CI_Model{
     function deleteUser($idx){
        $result = $this->db->where('id', $idx)->delete('user');
        return $result;
+    }
+
+    function confirmPW($pw, $idx){
+        $sql = "select * from user where id=".$idx." and pw=".$pw."";
+        $result = $this->db->query($sql)->result();
+        return $result;
     }
 }
