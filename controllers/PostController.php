@@ -57,4 +57,13 @@ class PostController extends CI_Controller
 
 		$this->getPostList();
 	}
+
+	function confirmUser(){
+		$func = $this->uri->segment(3);
+
+		$data['func'] = $func;
+		$data['post'] = $this -> PostModel -> getPost($this->uri->segment(4));
+		$data['user'] = $this -> UserModel -> getUser($this->uri->segment(5));
+		$this -> load -> view('confirm_user', $data);
+	}
 }
