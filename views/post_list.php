@@ -23,7 +23,7 @@
                 <td>
                     <a
                         rel="external"
-                        href="/bbs/<?=$this->uri->segment(1);?>/view/<?=$this->uri->segment(3);?>/<?=$lt->id?>">
+                        href="/<?=$this->uri->segment(1);?>/viewPost/<?=$lt->id?>">
                         <?=$lt->title?></a>
                 </td>
                 <td><?=$lt->writer?></td>

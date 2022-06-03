@@ -13,13 +13,15 @@ class UserModel extends CI_Model{
     }
 
     public function registerUser($array){
+
         $insertArray = array(
             'name' => $array['name'],
             'pw' => $array['pw'],
             'email' => $array['email']
         );
 
-        $result = $this->db->insert($arrays['user'], $insertArray);
+        $this->db->insert('user', $insertArray);
+        $result = $this->db->insert_id();
         return $result;
     }
     

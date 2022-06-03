@@ -22,5 +22,16 @@ class PostModel extends CI_Model{
         return $result;
     }
 
+    function writePost($array){
+        $insertArray = array(
+            'title' => $array['title'],
+            'content' => $array['content'],
+            'writer' => $array['writer']
+        );
+
+        $this->db->insert('post', $insertArray);
+        $result = $this->db->insert_id();
+        return $result;
+    }
     
 }

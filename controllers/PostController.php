@@ -11,7 +11,7 @@ class PostController extends CI_Controller
 }
 
 	public function index() {
-		$this -> viewPost();
+		$this -> writePost();
 	}
 
 	public function getPostList() {
@@ -20,33 +20,33 @@ class PostController extends CI_Controller
 	}
 
 	public function viewPost($idx=1) {
-		// $data['post'] = $this -> PostModel -> getPost($idx);
-		// $this -> load -> view('view_post', $data);
-		$this -> load -> view('write_post');
+		$data['post'] = $this -> PostModel -> getPost($idx);
+		$this -> load -> view('view_post', $data);
 	}
 
-	// public function writePost(){
-	// 	//echo '<meta http-equiv="content-type" content="text/html; charset=utf-8" />';
+	public function writePost(){
+		//echo '<meta http-equiv="content-type" content="text/html; charset=utf-8" />';
 
-	// 	if($_POST){
-	// 		// $this -> load -> helper('alert');
+		if($_POST){
+			$userData = array(
+				'name'=> $this->input->post('name', TRUE),
+				'pw'=> $this->input->post('pw', TRUE),
+				'email'=> $this->input->post('email', FALSE)
+			);
+			$result = $this->UserModel->registerUser($userData);
 
-	// 		// if(!$this->input->post('title', TRUE) AND !$this->input->post('content', TRUE)){
-	// 		// }
+			$writeData = array(
+				'title'=> $this->input->post('title', TRUE),
+				'content'=> $this->input->post('content', TRUE),
+				'writer'=> $result
+			);
+			$write_result = $this->PostModel->writePost($writeData);
 
-	// 		$userData = array(
-	// 			'name'=> $this->input->post('name', TRUE),
-	// 			'pw'=> $this->input->post('pw', TRUE),
-	// 			'email'=> $this->input->post(email, FALSE)
-	// 		);
-	// 		$result = $this->UserModel->registerUser($userData);
-
-	// 		$writeData = array(
-	// 			'title'=> $this->input->post('title', TRUE),
-	// 			'content'=> $this->input->post('content', TRUE)
-	// 			'writer'=> $this->$result
-	// 		);
-	// 		$write_result = $this->PostModel->writePost($writeData);
-	// 	}
-	// }
+			if($write_result >= 1)
+				$this->getPostList();
+		}
+		else{
+			$this->load->view('write_post');
+		}
+	}
 }
