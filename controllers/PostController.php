@@ -49,4 +49,12 @@ class PostController extends CI_Controller
 			$this->load->view('write_post');
 		}
 	}
+
+	function deletePost($userIdx, $postIdx){
+		$result = $this->UserModel->deleteUser($userIdx);
+		if($result > 0)
+			$this->PostModel->deletePost($postIdx);
+
+		$this->getPostList();
+	}
 }

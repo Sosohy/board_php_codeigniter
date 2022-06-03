@@ -34,4 +34,8 @@ class PostModel extends CI_Model{
         return $result;
     }
     
+    function deletePost($idx) {
+        $result = $this->db->where('id', $idx)-> delete('post');
+        return $result;
+    }
 }
