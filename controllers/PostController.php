@@ -95,8 +95,9 @@ class PostController extends CI_Controller
 		}
 	}
 
-	function searchPost($word){
-		$data['post'] = $this -> PostModel -> searchPost($word);
+	function searchPost(){
+		$word = $this->input->post('searchWord', TRUE);
+		$data['postList'] = $this -> PostModel -> searchPost($word);
 		$data['word'] = $word;
 		$this -> load -> view('post_search', $data);
 	}

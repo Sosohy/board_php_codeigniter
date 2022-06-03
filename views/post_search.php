@@ -5,11 +5,6 @@
     <h1>방명록</h1>
     <h5>방명록을 남겨주세요:)</h5>
 
-    <form id="search" method="post" action="/PostController/searchPost">
-        <input type="text" name="searchWord" id="searchWord"/>
-        <input type="submit" value="검색" id="searchBtn"/>
-    </form>
-    <button><a href="/PostController/writePost">글쓰기</a></button>
     <table cellpadding="0" cellspacing="15">
         <thead>
             <tr>
