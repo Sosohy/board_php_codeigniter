@@ -105,7 +105,7 @@ class PostController extends CI_Controller
 		$result = $this->CommentModel->deleteComment($this->uri->segment(4), $this->uri->segment(5));
 		if($result > 0)
 			$this->UserModel->deleteUser($this->uri->segment(5));
-			$this->viewPost($this->uri->segment(4));
+		$this->viewPost($this->uri->segment(4));
 	}
 	
 	//user
