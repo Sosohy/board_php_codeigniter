@@ -1,38 +1,39 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class PostModel extends CI_Model{
+class CommentModel extends CI_Model{
 
     function __construct(){
         parent::__construct();
         $this->load->database();
     }
 
-    function getPostList(){
-        $sql = 'Select post.*, user.name FROM post 
-                JOIN user on post.writer = user.id 
-                ORDER BY post.id DESC';
+    function getCommentList($postIdx){
+        $sql = 'Select comment.*, user.name FROM comment 
+                JOIN user on comment.writer = user.id 
+                WHERE post_idx='.$postIdx.'';
+        
+        'Select * FROM comment WHERE post_idx='.$postIdx.'';
         $result = $this->db->query($sql)->result();
 
         return $result;
     }
 
-    function getPost($idx){
+    function getComment($idx){
         $sql = "update post SET views = views + 1 WHERE id=".$idx."";
         $this->db->query($sql);
 
         $result = $this->db->get_where('post', array('id'=>$idx))->row();
         return $result;
     }
-
-    function writePost($array){
+    
+    function writeComment($array){
         $insertArray = array(
-            'title' => $array['title'],
-            'content' => $array['content'],
             'writer' => $array['writer'],
-            'private' => $array['private']
+            'post_idx' => $array['post_idx'],
+            'content' => $array['content'],
         );
-        $this->db->insert('post', $insertArray);
-
+        $this->db->insert('comment', $insertArray);
+        
         $result = $this->db->insert_id();
         return $result;
     }
@@ -46,15 +47,10 @@ class PostModel extends CI_Model{
         $this->db->where('id', $idx)->update('post', $insertArray);
     }
 
-    function deletePost($idx) {
-        $result = $this->db->where('id', $idx)-> delete('post');
-        return $result;
-    }
-
-    function searchPost($word){
-        $sql = "Select * FROM post JOIN user on post.writer = user.id WHERE (title LIKE '%".$word."%') OR (content LIKE '%".$word."%') OR (name LIKE '%".$word."%');";
+    function deleteComment($postIdx, $userIdx) {
+        $sql = 'Delete FROM comment WHERE post_idx='.$postIdx'and writer='.$userIdx.'';
         $result = $this->db->query($sql)->result();
-
         return $result;
     }
+
 }

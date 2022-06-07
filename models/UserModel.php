@@ -31,6 +31,18 @@ class UserModel extends CI_Model{
         return $result;
     }
     
+    public function registerCommentUser($array){
+
+        $insertArray = array(
+            'name' => $array['name'],
+            'pw' => $array['pw'],
+        );
+
+        $this->db->insert('user', $insertArray);
+        $result = $this->db->insert_id();
+        return $result;
+    }
+
     function deleteUser($idx){
        $result = $this->db->where('id', $idx)->delete('user');
        return $result;

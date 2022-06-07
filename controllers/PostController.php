@@ -8,12 +8,14 @@ class PostController extends CI_Controller
 		        $this->load->database();
 		        $this->load->model('PostModel');
 				$this->load->model('UserModel');
+				$this->load->model('CommentModel');
 	}
 
 	public function index() {
 		$this -> getPostList();
 	}
 
+	//post
 	public function getPostList() {
 		$data['postList'] = $this -> PostModel -> getPostList();
 		$this -> load -> view('post_list', $data);
@@ -22,6 +24,7 @@ class PostController extends CI_Controller
 	public function viewPost($idx=1) {
 		$data['post'] = $this -> PostModel -> getPost($idx);
 		$data['user'] = $this->UserModel->getUser($data['post']->writer);
+		$data['commentList'] = $this -> CommentModel -> getCommentList($idx);
 		$this -> load -> view('view_post', $data);
 	}
 
@@ -50,13 +53,6 @@ class PostController extends CI_Controller
 		}
 	}
 
-	function deletePost(){
-		$result = $this->PostModel->deletePost($this->uri->segment(4));
-		if($result > 0)
-			$this->UserModel->deleteUser($this->uri->segment(5));
-		$this->getPostList();
-	}
-
 	function modifyPost(){
 		if($_POST){
 			$modifyData = array(
@@ -71,6 +67,48 @@ class PostController extends CI_Controller
 		}
 	}
 
+	function deletePost(){
+		$result = $this->PostModel->deletePost($this->uri->segment(4));
+		if($result > 0)
+			$this->UserModel->deleteUser($this->uri->segment(5));
+		$this->getPostList();
+	}
+
+	function searchPost(){
+		$word = $this->input->post('searchWord', TRUE);
+		$data['postList'] = $this -> PostModel -> searchPost($word);
+		$data['word'] = $word;
+		$this -> load -> view('post_search', $data);
+	}
+
+
+	//comment
+	function writeComment(){
+		if($_POST){
+			$userData = array(
+				'name'=> $this->input->post('name', TRUE),
+				'pw'=> $this->input->post('pw', TRUE),
+			);
+			$result = $this->UserModel->registerCommentUser($userData);
+
+			$commentData = array(
+				'post_idx'=> $this->uri->segment(3),
+				'writer'=> $result,
+				'content'=>$this->input->post('content', TRUE)
+			);
+			$comment_result = $this->PostModel->writeComment($commentData);
+			$this->viewPost($this->uri->segment(3));
+		}
+	}
+
+	function deleteComment(){
+		$result = $this->CommentModel->deleteComment($this->uri->segment(4), $this->uri->segment(5));
+		if($result > 0)
+			$this->UserModel->deleteUser($this->uri->segment(5));
+			$this->viewPost($this->uri->segment(4));
+	}
+	
+	//user
 	function confirmUser(){
 		$func = $this->uri->segment(3);
 
@@ -80,7 +118,7 @@ class PostController extends CI_Controller
 			if($result != NULL){
 				if($func == "delete")
 					$this->deletePost();
-				else{
+				else if($func){
 					$data['post'] = $this -> PostModel -> getPost($this->uri->segment(4));
 					$data['user'] = $this -> UserModel -> getUser($this->uri->segment(5));
 					$this -> load -> view('modify_post', $data);
@@ -94,15 +132,14 @@ class PostController extends CI_Controller
 			$data['func'] = $func;
 			$data['post'] = $this -> PostModel -> getPost($this->uri->segment(4));
 			$data['user'] = $this -> UserModel -> getUser($this->uri->segment(5));
-			$this -> load -> view('confirm_user', $data);
+			
+			if($func == "commentDelete")
+				$this -> load -> view('comment_user', $data);
+			else
+				$this -> load -> view('confirm_user', $data);
 		}
 	}
 
-	function searchPost(){
-		$word = $this->input->post('searchWord', TRUE);
-		$data['postList'] = $this -> PostModel -> searchPost($word);
-		$data['word'] = $word;
-		$this -> load -> view('post_search', $data);
-	}
+	
 
 }

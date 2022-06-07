@@ -20,10 +20,22 @@
     <hr>
     <?=$post->content?>
     <hr>
-
-    <form class="form-horizontal" method="post" action="" id="writeAction">
+    <p>댓글</p>
+    <?php 
+            foreach($commentList as $lt)
+            {
+            ?>
+            <div id="comment">
+                <?=$lt->name?> <?=$lt->date?>
+                <input type="button" value="삭제" onClick="location.href='/PostController/confirmUser/commentDelete/<?=$post->id?>/<?=$lt->writer?>'"/>
+                <br>
+                <?=$lt->content?>
+            </div>
+            <?php
+            }
+            ?>
+    <form class="form-horizontal" method="post" action="/PostController/writeComment/<?=$post->id?>" id="CommentAction" enctype="multipart/form-data">
         <fieldset>
-            <legend>댓글</legend>
             <table cellpadding="5" cellspacing="5">
                 <tbody>
                     <tr>
@@ -32,12 +44,24 @@
                     </tr>
                     <tr>
                         <td>내용</td> <td><textarea class="input-xlarge" id="content" name="content"></textarea>
+                        <input type="file" name="image">
                     </tr>
                 </tbody>
             </table>
             <div class="form-actions">
-                <button type="submit" class="btn btn-primary" id="writeBtn">등록</button>
+                <button type="submit" class="btn btn-primary" id="commentBtn">등록</button>
             </div>
         </fieldset> 
     </form>
 </article>
+
+
+<style>
+ #comment{
+        border: 1px solid black; 
+        margin-top: 5px; 
+        margin-bottom: 5px; 
+        padding:10px;
+        border-radius: 10px;
+     }
+</style>
