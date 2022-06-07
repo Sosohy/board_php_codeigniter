@@ -96,7 +96,7 @@ class PostController extends CI_Controller
 				'writer'=> $result,
 				'content'=>$this->input->post('content', TRUE)
 			);
-			$comment_result = $this->PostModel->writeComment($commentData);
+			$comment_result = $this->CommentModel->writeComment($commentData);
 			$this->viewPost($this->uri->segment(3));
 		}
 	}
@@ -114,15 +114,20 @@ class PostController extends CI_Controller
 
 		if($_POST){
 			$result = $this->UserModel->confirmPW($this->input->post('pw', TRUE), $this->uri->segment(5));
-
 			if($result != NULL){
-				if($func == "delete")
-					$this->deletePost();
-				else if($func){
-					$data['post'] = $this -> PostModel -> getPost($this->uri->segment(4));
-					$data['user'] = $this -> UserModel -> getUser($this->uri->segment(5));
-					$this -> load -> view('modify_post', $data);
-				}	
+				switch($func){
+					case "delete":
+						$this->deletePost(); 
+						break;
+					case "commentDelete":
+						$this->deleteComment();
+						break;
+					case "modify":
+						$data['post'] = $this -> PostModel -> getPost($this->uri->segment(4));
+						$data['user'] = $this -> UserModel -> getUser($this->uri->segment(5));
+						$this -> load -> view('modify_post', $data);
+						break;
+					}
 			}else{
 				echo '<script type="text/javascript">'; 
 				echo 'alert("비밀번호가 일치하지 않습니다."); history.back();'; 

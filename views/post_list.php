@@ -31,8 +31,22 @@
                 <td>
                     <a
                         rel="external"
-                        href="/<?=$this->uri->segment(1);?>/viewPost/<?=$lt->id?>">
-                        <?=$lt->title?></a>
+                        <?php
+                        if($lt->private == 0){
+                        ?>
+                        href="/<?=$this->uri->segment(1);?>/viewPost/<?=$lt->id?>"
+                        <?php } ?>
+                        >
+                        <?=$lt->title?> 
+                        <?php
+                        if($lt->private == 1){
+                        ?>
+                        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828415.png" width="15px" height="15px">
+                        <?php
+                        }
+                        ?>
+                    </a> 
+                    
                 </td>
                 <td><?=$lt->name?></td>
                 <td><?=$lt->date?></td>

@@ -49,7 +49,7 @@ class UserModel extends CI_Model{
     }
 
     function confirmPW($pw, $idx){
-        $sql = "select * from user where id=".$idx." and pw=".$pw."";
+        $sql = "select * from user where id=".$idx." and pw='".$pw."'";
         $result = $this->db->query($sql)->result();
         return $result;
     }
