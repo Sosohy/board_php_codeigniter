@@ -33,8 +33,8 @@
                 </tbody>
             </table>
             <div class="form-actions">
-                <button class="btn" onClick="document.location.reload()">취소</button>
-                <button type="submit" class="btn btn-primary" id="confirmUserPW">완료</button>  
+                <input type="button" onClick="history.back(1)" value="취소"/>
+                <input type="submit" class="btn btn-primary" id="confirmUserPW" value="완료"/>  
             </div>
         </fieldset> 
     </form>

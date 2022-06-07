@@ -86,6 +86,9 @@ class PostController extends CI_Controller
 					$this -> load -> view('modify_post', $data);
 				}	
 			}else{
+				echo '<script type="text/javascript">'; 
+				echo 'alert("비밀번호가 일치하지 않습니다."); history.back();'; 
+				echo '</script>';
 			}
 		}else{
 			$data['func'] = $func;
