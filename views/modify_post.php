@@ -29,8 +29,8 @@
                 </tbody>
             </table>
             <div class="form-actions">
-                <button type="submit" class="btn btn-primary" id="writeBtn">수정</button>
-                <button class="btn" onClick="document.location.reload()">취소</button>
+                <input type="button" onClick="history.go(-2)" value="취소"/>
+                <input type="submit" class="btn btn-primary" id="writeBtn" value="완료"/>  
             </div>
         </fieldset> 
     </form>
