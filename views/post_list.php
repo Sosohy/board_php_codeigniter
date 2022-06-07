@@ -21,18 +21,20 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach($postList as $lt)
+            <?php 
+            $i = count($postList);
+            foreach($postList as $lt)
             {
             ?>
             <tr>
-                <th scope="row"><?=$lt->id?></th>
+                <th scope="row"><?=$i--?></th>
                 <td>
                     <a
                         rel="external"
                         href="/<?=$this->uri->segment(1);?>/viewPost/<?=$lt->id?>">
                         <?=$lt->title?></a>
                 </td>
-                <td><?=$lt->writer?></td>
+                <td><?=$lt->name?></td>
                 <td><?=$lt->date?></td>
                 <td><?=$lt->views?></td>
             </tr>

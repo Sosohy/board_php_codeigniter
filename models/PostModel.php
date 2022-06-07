@@ -8,7 +8,9 @@ class PostModel extends CI_Model{
     }
 
     function getPostList(){
-        $sql = 'select * from post';
+        $sql = 'Select post.*, user.name FROM post 
+                JOIN user on post.writer = user.id 
+                ORDER BY post.id DESC';
         $result = $this->db->query($sql)->result();
 
         return $result;
