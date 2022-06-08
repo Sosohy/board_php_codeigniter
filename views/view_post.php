@@ -29,6 +29,12 @@
                 <?=$lt->name?> <?=$lt->date?>
                 <input type="button" value="삭제" onClick="location.href='/PostController/confirmUser/commentDelete/<?=$post->id?>/<?=$lt->writer?>'"/>
                 <br>
+                <?php
+                    if($lt->imgPath != NULL){
+                ?>
+                <img src="/img/<?=$lt->imgPath?>" width = 150px;/>
+                <?php } ?>
+                <br>
                 <?=$lt->content?>
             </div>
             <?php
@@ -44,7 +50,7 @@
                     </tr>
                     <tr>
                         <td>내용</td> <td><textarea class="input-xlarge" id="content" name="content"></textarea>
-                        <input type="file" name="image">
+                        <input type="file" name="imgFile">
                     </tr>
                 </tbody>
             </table>

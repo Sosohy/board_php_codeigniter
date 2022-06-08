@@ -28,6 +28,11 @@ class CommentModel extends CI_Model{
         return $result;
     }
 
+    function uploadImg($commentIdx, $imgPath){
+        $sql = "Update comment set imgPath = '".$imgPath."' WHERE id = ".$commentIdx."";
+        $result = $this->db->query($sql);
+    }
+
     function deleteComment($postIdx, $userIdx) {
         //$sql = 'Delete FROM comment WHERE post_idx='.$postIdx.' and writer='.$userIdx.'';
         $result = $this->db->where('post_idx', $postIdx)->where('writer', $userIdx)->delete('comment');
