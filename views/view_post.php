@@ -60,7 +60,6 @@
         </fieldset> 
     </form>
     <hr>
-    <button type="button" onclick="location.href='/<?=$this->uri->segment(1);?>/viewPost/<?=($lt->id)-1?>' ">이전 글</button>
 </article>
 
 
