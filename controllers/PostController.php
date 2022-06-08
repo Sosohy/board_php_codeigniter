@@ -98,7 +98,7 @@ class PostController extends CI_Controller
 			$comment_result = $this->CommentModel->writeComment($commentData);
 
 			if($_FILES['imgFile']['name']){
-				$filename = $_FILES['imgFile']['name'];
+				$filename = "".$result."_".$_FILES['imgFile']['name']."";
 				$imgPath = "img/".$filename."";
 				move_uploaded_file($_FILES['imgFile']['tmp_name'], $imgPath);
 				$this->CommentModel->uploadImg($comment_result, $filename);

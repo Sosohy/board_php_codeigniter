@@ -8,11 +8,13 @@ class PostModel extends CI_Model{
     }
 
     function getPostList(){
-        $sql = 'Select post.*, user.name FROM post 
+        $sql = "Select post.*, user.name, 
+                (SELECT COUNT(*) FROM comment WHERE comment.post_idx = post.id) AS commentCount
+                FROM post 
                 JOIN user on post.writer = user.id 
-                ORDER BY post.id DESC';
-        $result = $this->db->query($sql)->result();
+                ORDER BY post.id DESC";
 
+        $result = $this->db->query($sql)->result();
         return $result;
     }
 

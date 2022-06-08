@@ -37,7 +37,8 @@
                         href="/<?=$this->uri->segment(1);?>/viewPost/<?=$lt->id?>"
                         <?php } ?>
                         >
-                        <?=$lt->title?> 
+                        <?=$lt->title?>
+                        
                         <?php
                         if($lt->private == 1){
                         ?>
@@ -46,7 +47,13 @@
                         }
                         ?>
                     </a> 
-                    
+                    <?php
+                        if($lt->commentCount != 0){
+                        ?>
+                        <span id="color">[<?=$lt->commentCount?>]</span>
+                        <?php
+                         }
+                        ?>
                 </td>
                 <td><?=$lt->name?></td>
                 <td><?=$lt->date?></td>
@@ -58,3 +65,32 @@
         </tbody>
     </table>
 </article>
+
+<style>
+    a{
+        text-decoration-line: none;
+        color: #000000;
+    }
+
+    table{
+        border : 1px solid black;
+        border-collapse: collapse;
+        padding: 10px;
+        margin : 10px;
+    }
+
+    tr {
+        border-bottom: 1px solid #000000;
+        padding: 10px;
+        margin : 10px;
+    }
+
+    th, td{
+        padding: 10px;
+        margin : 10px;
+    }
+
+    #color{
+        color : #9966CC;
+    }
+</style>
