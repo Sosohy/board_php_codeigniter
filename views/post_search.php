@@ -2,9 +2,12 @@
     <header>
         <h1> </h1>
     </header>
-    <h1>방명록</h1>
-    <h5>방명록을 남겨주세요:)</h5>
-
+    <h1>게시글 검색</h1>
+    <form id="search" method="post" action="/PostController/searchPost">
+        <input type="text" name="searchWord" id="searchWord"/>
+        <input type="submit" value="검색" id="searchBtn"/>
+    </form>
+    <h4> 검색어 [<span id="color"><?=$word?></span>]을/를 포함한 검색 결과입니다.</h4>
     <table cellpadding="0" cellspacing="15">
         <thead>
             <tr>
@@ -37,3 +40,9 @@
         </tbody>
     </table>
 </article>
+
+<style>
+    #color{
+        color : #9966CC;
+    }
+</style>
