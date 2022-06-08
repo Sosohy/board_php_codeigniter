@@ -12,7 +12,8 @@ class PostController extends CI_Controller
 	}
 
 	public function index() {
-		$this -> getPostList();
+		$this -> load -> view('upload_test');
+		//$this -> getPostList();
 	}
 
 	//post
@@ -81,7 +82,6 @@ class PostController extends CI_Controller
 		$this -> load -> view('post_search', $data);
 	}
 
-
 	//comment
 	function writeComment(){
 		if($_POST){
@@ -146,5 +146,13 @@ class PostController extends CI_Controller
 	}
 
 	
+	//uploadImg
+	function uploadImg(){
+		if($_FILES['imgFile']['name']){
+			$filename = $_FILES['imgFile']['name'];
+			$imgPath = "img/{$_FILES['imgFile']['name']}";
+			move_uploaded_file($_FILES['imgFile']['tmp_name'],$imgPath);
+		}
+	}
 
 }
