@@ -1,4 +1,7 @@
 <article id="board_area">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet">
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <header>
         <h1> </h1>
     </header>
@@ -10,7 +13,7 @@
         <input type="submit" value="검색" id="searchBtn"/>
     </form>
     <button><a href="/PostController/writePost">글쓰기</a></button>
-    <table cellpadding="0" cellspacing="15">
+    <table id="list" cellpadding="0" cellspacing="15">
         <thead>
             <tr>
                 <th scope="col">번호</th>
@@ -66,6 +69,11 @@
     </table>
 </article>
 
+<script>
+    $(document).ready(function() {
+        $('#list').DataTable();
+    } );
+</script>
 <style>
     a{
         text-decoration-line: none;

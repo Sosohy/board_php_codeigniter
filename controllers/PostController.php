@@ -17,29 +17,6 @@ class PostController extends CI_Controller
 
 	//post
 	public function getPostList() {
-
-		// $this->load->library('pagination');
-		// $config['baseUrl'] = '/PostController/getPostList/page';
-		// $config['totalRows'] = $this->PostModel->getPostCount();
-		// $config['perPage'] = 5; //나중에 리스트로 받아오기
-		// $config['uriSegment'] = 3; //페이지번호 세그먼트 -> 포스트리스트에만 적용해도 되나?
-
-		// $this->pagination->initialize($config);
-		// $data['pagination'] = $this->pagination->creat_links();
-		
-		// $page = $this->uri->segment(5, 1);
-
-		// if($page > 1){
-		// 	$start = (($page/$config['perPage'])) * $config['perPage'];
-		// }else{
-		// 	$start = ($page-1) * $config['perPage'];
-		// }
-
-		// $limit = $config['perPage'];
-
-		// $data['postList'] = $this->PostModel->getPostList($this->uri->segment(2), '', $start, $limit);
-		// $this -> load -> view('post_list', $data);
-
 		$data['postList'] = $this -> PostModel -> getPostList();
 		$this -> load -> view('post_list', $data);
 	}
