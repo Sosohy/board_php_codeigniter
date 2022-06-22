@@ -59,7 +59,12 @@
                         ?>
                 </td>
                 <td><?=$lt->name?></td>
-                <td><?=$lt->date?></td>
+                <td>
+                    <?php
+                        $day = explode(" ", $lt->date)[0];
+                    ?>
+                    <?=$day?>
+                </td>
                 <td><?=$lt->views?></td>
             </tr>
             <?php
