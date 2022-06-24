@@ -39,4 +39,10 @@ class CommentModel extends CI_Model{
         return $result;
     }
 
+    function deleteComments($postIdx) {
+        //$sql = 'Delete FROM comment WHERE post_idx='.$postIdx.'';
+        $result = $this->db->where('post_idx', $postIdx)->delete('comment');
+        return $result;
+    }
+
 }

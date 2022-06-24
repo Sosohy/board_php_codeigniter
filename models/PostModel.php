@@ -54,7 +54,9 @@ class PostModel extends CI_Model{
     }
 
     function searchPost($word){
-        $sql = "Select * FROM post JOIN user on post.writer = user.id WHERE (title LIKE '%".$word."%') OR (content LIKE '%".$word."%') OR (name LIKE '%".$word."%');";
+        $sql = "Select post.*, user.name FROM post 
+                JOIN user on post.writer = user.id 
+                WHERE (title LIKE '%".$word."%') OR (content LIKE '%".$word."%') OR (name LIKE '%".$word."%');";
         $result = $this->db->query($sql)->result();
 
         return $result;

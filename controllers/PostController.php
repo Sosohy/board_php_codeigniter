@@ -21,7 +21,7 @@ class PostController extends CI_Controller
 		$this -> load -> view('post_list', $data);
 	}
 
-	public function viewPost($idx=1) {
+	public function viewPost($idx) {
 		$data['post'] = $this -> PostModel -> getPost($idx);
 		$data['user'] = $this->UserModel->getUser($data['post']->writer);
 		$data['commentList'] = $this -> CommentModel -> getCommentList($idx);
@@ -68,6 +68,7 @@ class PostController extends CI_Controller
 	}
 
 	function deletePost(){
+		$commentDel = $this->CommentModel->deleteComments($this->uri->segment(4));
 		$result = $this->PostModel->deletePost($this->uri->segment(4));
 		if($result > 0)
 			$this->UserModel->deleteUser($this->uri->segment(5));

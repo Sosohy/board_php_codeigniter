@@ -13,7 +13,7 @@ class UserModel extends CI_Model{
         return $result;
     }
 
-    public function getUser($idx){
+    public function getUser($idx=1){
         $result = $this->db->get_where('user', array('id'=>$idx))->row();
         return $result;
     }
